@@ -45,6 +45,7 @@ specs/[feature]/
 | `/sdd:tasks` | 3 | `plan.md`, `contracts/` | `tasks.md` |
 | `/sdd:next-task` | 4 | `tasks.md` | — (extracts single task) |
 | `/sdd:analyze` | any | `spec.md` | inconsistency report |
+| `/sdd:amend [what changed]` | any | all spec files | updated spec chain |
 | `/sdd:validate` | 5 | all spec files + code | drift report |
 
 ---
@@ -113,6 +114,7 @@ Then [observable outcome]
 
 ## Gate Checklist (Summary)
 
+**Gate 0 (constitution.md):** Stack locked? 5+ security rules? No vague banned patterns? Structure documented?
 **Gate 1 (spec.md):** Testable ACs? No tech details? No open questions? Scope defined?
 **Gate 2 (plan.md + contracts):** AC traceability? All errors defined? Schema complete?
 **Gate 3 (tasks.md):** Tests before implementation? Task size OK? No dependency cycles?

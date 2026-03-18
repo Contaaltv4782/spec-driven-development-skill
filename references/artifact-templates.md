@@ -83,6 +83,10 @@ src/
 ```markdown
 # [Feature Name]
 
+Status: Draft
+Version: 1.0
+Last updated: [YYYY-MM-DD]
+
 ## Overview
 <!-- 1-2 sentences describing the feature for a non-technical stakeholder -->
 
@@ -177,6 +181,13 @@ Implements: `specs/[branch]/spec.md`
 ## Integration Points
 <!-- External services, APIs, or other features this touches -->
 - [System]: [How it's used]
+
+## AC Coverage Map
+<!-- Every [MUST] AC from spec.md must appear here. Required for Gate 2. -->
+| AC | Component(s) | Contract(s) |
+|----|-------------|-------------|
+| AC-1 | [ComponentName] | [contracts/file.md] |
+| AC-E1 | [ComponentName] | [contracts/file.md] |
 
 ## Out of Scope (Technical)
 <!-- Technical boundaries that mirror spec.md out-of-scope -->

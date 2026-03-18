@@ -267,12 +267,43 @@ Do not use your judgment about what "makes sense" — follow the contract.
 
 ---
 
+## Analyze Prompt (/sdd:analyze — run any time)
+
+Detects internal inconsistencies within the spec itself, before Plan generation.
+Different from `/sdd:clarify` (resolves ambiguities with human input) and
+`/sdd:validate` (checks implementation against spec). Use after Clarify, before Plan.
+
+```
+Read specs/[feature]/spec.md and run an inconsistency analysis.
+
+Check for:
+1. AC conflicts — two ACs that cannot both be satisfied simultaneously
+   Example: AC-1 says "returns 404 for unknown users", AC-3 says "auto-creates user on first access"
+2. Scope overlap — an AC that contradicts the Out of Scope section
+3. NFRs without measurable thresholds — "fast", "secure", "reliable" with no numeric target
+4. [MUST] ACs with no error scenario — every MUST happy-path AC should have a paired error AC
+5. Duplicate coverage — two ACs that describe the same behavior with different wording
+6. Untestable criteria — ACs that cannot be expressed as an automated test
+
+Return issues in this format:
+[ISSUE] [AC-N or section] [Type: Conflict/Overlap/Vague/Missing/Duplicate/Untestable] [Description]
+
+If no issues are found, respond: "No inconsistencies detected."
+Do NOT rewrite the spec. Return issues only.
+```
+
+---
+
 ## Phase 5 — Validate Prompts
 
 ### Drift Detection Prompt
 
+**Format A — agent with file access (reads contracts to discover implementation files):**
 ```
-Compare the implementation in [file paths] against:
+Read all contracts in specs/[feature]/contracts/ to identify which source files to check.
+For each contract endpoint, find the corresponding route/handler in src/.
+
+Compare the implementation against:
 - Acceptance criteria in specs/[feature]/spec.md
 - API contracts in specs/[feature]/contracts/
 - Data model in specs/[feature]/data-model.md

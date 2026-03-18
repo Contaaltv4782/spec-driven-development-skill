@@ -129,7 +129,7 @@ Use these thresholds to determine review intensity:
 
 ### Automated Drift Detection
 
-Add to your CI pipeline to catch spec drift on every PR:
+Three checks — one is ready to use, two require project-specific implementation.
 
 ```yaml
 # .github/workflows/spec-drift.yml
@@ -146,22 +146,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check API contract signatures
-        run: |
-          # Extract function signatures from contracts/
-          # Compare against implemented routes
-          # Fail if signatures differ
-          node scripts/check-contract-drift.js
-
-      - name: Check database schema
-        run: |
-          # Compare data-model.md entities against migration files
-          node scripts/check-schema-drift.js
-
+      # ✅ READY TO USE: verifies every AC-ID from spec.md appears in a test file
       - name: Verify AC test coverage
         run: |
-          # Check that each AC-ID from spec.md appears in test files
-          node scripts/check-ac-coverage.js
+          FEATURE_DIR="specs/$(git diff --name-only origin/main | grep specs/ | head -1 | cut -d/ -f2)"
+          if [ -d "$FEATURE_DIR" ]; then
+            while IFS= read -r ac_id; do
+              if ! grep -r "$ac_id" tests/ src/ --include="*.test.*" --include="*.spec.*" -q; then
+                echo "FAIL: $ac_id has no test coverage"
+                exit 1
+              fi
+            done < <(grep -oP 'AC-[A-Z0-9]+' "$FEATURE_DIR/spec.md" | sort -u)
+          fi
+
+      # ⚠️ PROJECT-SPECIFIC: requires implementation for your stack
+      # Must: extract route definitions from src/, compare signatures against contracts/*.md
+      # Example for Express/Hono: parse route files for method+path, compare against contract headers
+      - name: Check API contract signatures
+        run: echo "[PROJECT-SPECIFIC] Implement scripts/check-contract-drift.sh for your routing framework"
+
+      # ⚠️ PROJECT-SPECIFIC: requires implementation for your ORM/migration tool
+      # Must: compare entities in data-model.md against your migration files or schema dump
+      # Example for Drizzle: diff drizzle/schema.ts against data-model.md entities
+      - name: Check database schema
+        run: echo "[PROJECT-SPECIFIC] Implement scripts/check-schema-drift.sh for your ORM"
 ```
 
 ### Spec Completeness Check
@@ -171,9 +179,14 @@ jobs:
 - name: Validate spec completeness
   if: contains(github.event.pull_request.changed_files, 'specs/')
   run: |
-    # Check spec.md has no [NEEDS CLARIFICATION] items
+    # Fail if any [NEEDS CLARIFICATION] items are unresolved
     if grep -r "\[NEEDS CLARIFICATION\]" specs/; then
       echo "ERROR: Unresolved clarification items in spec"
+      exit 1
+    fi
+    # Fail if any AC is missing a MoSCoW label
+    if grep -P "^### AC-" specs/*/spec.md | grep -v "\[MUST\]\|\[SHOULD\]\|\[COULD\]\|\[WONT\]"; then
+      echo "ERROR: ACs missing MoSCoW priority labels"
       exit 1
     fi
 ```
