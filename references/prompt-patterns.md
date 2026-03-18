@@ -72,7 +72,8 @@ Constraints: [any hard limits — performance, security, platform]
 
 ### Clarify Phase Prompt
 
-*Run after generating spec.md, before creating the plan.*
+*Run after generating spec.md, before creating the plan. After the human reviews and approves
+the output, run the Post-Clarify Spec Update Prompt below to apply the changes to spec.md.*
 
 ```
 You are a spec reviewer. Read specs/[feature]/spec.md and perform a full clarification pass.
@@ -346,7 +347,8 @@ that leave the spec chain inconsistent — the exact problem amend is designed t
 
 Detects internal inconsistencies within the spec itself, before Plan generation.
 Different from `/sdd:clarify` (resolves ambiguities with human input) and
-`/sdd:validate` (checks implementation against spec). Use after Clarify, before Plan.
+`/sdd:validate` (checks implementation against spec). Most effective after Clarify
+and before Plan, but safe to run at any phase.
 
 ```
 Read specs/[feature]/spec.md and run an inconsistency analysis.
@@ -401,7 +403,7 @@ Format as a checklist. Mark each item PASS or FAIL with evidence.
 Run a full spec compliance check on the [feature] implementation.
 
 Files to check: [list implementation files]
-Spec files: specs/[feature]/spec.md, specs/[feature]/plan.md, specs/[feature]/contracts/
+Spec files: specs/[feature]/spec.md, specs/[feature]/plan.md, specs/[feature]/contracts/, constitution.md
 
 For each AC in spec.md, identify:
 - Which test covers it

@@ -89,11 +89,11 @@ Run these after generating plan.md + contracts/, before Gate 2:
 ```
 # Constitution Critic — finds plan violations
 You are a code reviewer enforcing project standards.
-Read: specs/[feature]/plan.md and constitution.md
+Read: specs/[feature]/plan.md, specs/[feature]/contracts/, and constitution.md
 
 Find: components that use banned patterns, technology choices that violate the locked
 stack, naming conventions that conflict with constitution rules, security constraints
-the plan fails to address.
+the plan or contracts fail to address, endpoints that expose data prohibited by constitution.
 
 Return issues in this format:
 [ISSUE] [Section] Constitution [Type: Banned/StackViolation/Naming/Security] [Description]

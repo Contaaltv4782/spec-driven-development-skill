@@ -3,7 +3,7 @@
 [![skills.sh](https://img.shields.io/badge/skills.sh-spec--driven--development-blue?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMiAxNWwtNS01IDEuNDEtMS40MUwxMCAxNC4xN2w3LjU5LTcuNTlMMTkgOGwtOSA5eiIvPjwvc3ZnPg==)](https://skills.sh)
 [![npm](https://img.shields.io/badge/npx_skills_add-mariano--aguero%2Fspec--driven--development--skill-brightgreen)](https://github.com/mariano-aguero/spec-driven-development-skill)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.2.0-orange)](https://github.com/mariano-aguero/spec-driven-development-skill/releases)
+[![Version](https://img.shields.io/badge/version-1.2.2-orange)](https://github.com/mariano-aguero/spec-driven-development-skill/releases)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-purple)](https://claude.ai/code)
 [![Cursor](https://img.shields.io/badge/Cursor-compatible-purple)](https://cursor.sh)
 [![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-compatible-purple)](https://github.com/features/copilot)
@@ -96,6 +96,8 @@ approval before the next phase begins. AI cannot approve its own output.
 
 ## Version History
 
+- v1.2.2 — `/sdd:amend` prompt (2-step cascade update), constitution.md in Drift Detection, Constitution Critic for Phase 2, contracts/ LOCKED label fixes, CLARIFY output artifact in diagram, Spec Reference in data-model template
+- v1.2.1 — contracts/ LOCKED phase label fix, critic agent output format standardized in ai-agent-patterns.md, Gate 0 wording, Gate 1 summary, Clarify→Gate 1 references in workflow-phases.md, Gate 2 migrations check, `[WONT]` AC example
 - v1.2.0 — Post-Clarify spec update prompt, Migrations section in data-model template, constitution `[PENDING]` blocking check for feature specs, standardized critic agent output format, Anti-Pattern 13 (Over-Specified Specs), Quick Start onboarding section
 - v1.1.0 — Constitution phase, MoSCoW priorities, Clarify step, spec levels taxonomy, research subagents, spec recovery point, `/sdd:analyze` command, 12 anti-patterns
 - v1.0.0 — Initial release: 5-phase workflow, 8 reference files, templates and prompts
