@@ -96,12 +96,17 @@ For non-intersecting [PENDING] items: proceed — they don't affect this spec.
 Use the prompt in `references/prompt-patterns.md → Phase 1 → Initial Specification Prompt`.
 Place output at `specs/[feature-branch-name]/spec.md`.
 
-**Step 1.3 — Resolve open questions**
-All items marked `[NEEDS CLARIFICATION]` must be resolved before proceeding.
-Do not assume. Do not defer. Get answers.
+**Step 1.3 — Clarify**
+Run the Clarify Phase Prompt from `references/prompt-patterns.md → Phase 1 → Clarify Phase Prompt`.
+Present the output to the human for review. After the human approves answers, run the
+Post-Clarify Spec Update Prompt (`references/prompt-patterns.md → Post-Clarify Spec Update Prompt`)
+to apply the approved resolutions to spec.md.
 
-**Step 1.4 — Human review**
-The human must read and approve `spec.md`. This gate is non-negotiable.
+All `[NEEDS CLARIFICATION]` items must be `[RESOLVED]` before proceeding. Do not assume. Do not defer.
+
+**Step 1.4 — Human review (Gate 1)**
+The human must read and approve the updated `spec.md`. Use the Gate 1 checklist in
+`references/quality-gates.md`. This gate is non-negotiable.
 Common review feedback:
 - "AC is too vague" → rewrite as Given/When/Then
 - "This is actually out of scope" → move to out-of-scope section

@@ -118,6 +118,11 @@ Given [initial context]
 When [action is taken]
 Then [expected outcome]
 
+### AC-4: [Explicitly Excluded Feature] [WONT]
+<!-- Use [WONT] to document what was considered and explicitly ruled out for this iteration.
+     This prevents the same discussion from recurring and signals deliberate scope decisions. -->
+This feature will NOT include [capability]. Reason: [why it's excluded from this iteration].
+
 <!-- Error and edge case ACs are required. Don't only spec the happy path. -->
 
 ### AC-E1: [Error Case Title] [MUST]

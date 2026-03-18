@@ -14,7 +14,7 @@ Run once per project before any feature work begins.
 | Security constraints | At least 5 explicit security rules covering input validation, auth, secrets, logging, CORS |
 | No banned patterns | Banned patterns list is specific and enforceable (not vague principles) |
 | File structure | Directory structure documented and matches actual project layout |
-| No `[PENDING]` items | All deferred decisions resolved or explicitly accepted as deferred |
+| No blocking `[PENDING]` items | All blocking `[PENDING]` items resolved; remaining items have explicit acceptance + target date |
 
 **Fail action:** Complete the constitution before creating any spec.
 
@@ -54,6 +54,7 @@ Run before Phase 3. All items must pass.
 | Contract completeness | Every component that exposes an API has a corresponding contract file |
 | Error code completeness | Contracts define all error responses (not just 200) |
 | Data model completeness | All entities mentioned in spec.md appear in data-model.md |
+| Migrations defined | If the feature modifies the database schema, at least one migration block is defined in data-model.md |
 | Index justification | Indexes in data-model.md are justified by specific query patterns |
 | No over-engineering | No abstractions that could be replaced with direct framework usage |
 | Technology fit | Technology choices use existing stack unless new dependency is justified |

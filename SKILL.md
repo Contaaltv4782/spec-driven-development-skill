@@ -48,7 +48,7 @@ New to SDD? Three steps to your first spec-driven feature:
    Clarify → Plan → Tasks → Implement → Validate
    Human approval required at each gate before the next phase
 
-For a full worked example, see `references/workflow-phases.md`.
+For detailed step-by-step instructions, see `references/workflow-phases.md`.
 
 ---
 
@@ -77,7 +77,7 @@ specs/
     spec.md              # Requirements — WHAT and WHY (MoSCoW prioritized)
     plan.md              # Implementation strategy — HOW
     data-model.md        # Data entities, relationships, schemas
-    contracts/           # API endpoints, events, interface definitions (LOCKED in Phase 5)
+    contracts/           # API endpoints, events, interface definitions (LOCKED after Phase 2 approval)
     tasks.md             # Atomic executable task list
     research.md          # Optional: context and alternatives considered
     decision_log.md      # Optional: rationale for key decisions

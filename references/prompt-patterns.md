@@ -383,7 +383,7 @@ Return issues in this format:
 Examples:
 [ISSUE] AC-3 QA Untestable "responds quickly" has no numeric threshold — specify ms target
 [ISSUE] AC-1 Security Missing No authentication requirement stated for this endpoint
-[ISSUE] Section:DataModel DB Schema Missing index on user_id + created_at for time-based queries
+[ISSUE] data-model.md DB Schema Missing index on user_id + created_at for time-based queries
 
 If no issues found for your role, respond: "No issues found for [role]."
 Do not approve, summarize, or compliment — issues only.

@@ -43,13 +43,19 @@ generating agent can't see (it anchors to its own output).
 
 Run these after generating spec.md, before Gate 1:
 
+Return issues in this format:
+`[ISSUE] [AC-N or Section] [Role] [Type: Untestable/Ambiguous/Missing/Risk/Schema/UX-Gap] [Description]`
+
 ```
 # QA Critic — finds untestable criteria
 You are a QA engineer reviewing a spec for testability.
 Read: specs/[feature]/spec.md
 Find: acceptance criteria that cannot be expressed as an automated test.
-Return only the problematic ACs and why they're untestable.
-Do not suggest fixes. List problems only.
+
+Return issues in this format:
+[ISSUE] [AC-N] QA [Type: Untestable/Ambiguous] [Description]
+
+Do not suggest fixes. Do not approve or compliment.
 ```
 
 ```
@@ -57,7 +63,11 @@ Do not suggest fixes. List problems only.
 You are a security engineer reviewing a spec.
 Read: specs/[feature]/spec.md
 Find: missing authentication, authorization, input validation, or data exposure risks.
-Return only gaps. Do not approve. Do not compliment.
+
+Return issues in this format:
+[ISSUE] [AC-N or Section] Security [Type: Missing/Risk] [Description]
+
+Do not approve or compliment — issues only.
 ```
 
 ```
@@ -65,7 +75,11 @@ Return only gaps. Do not approve. Do not compliment.
 You are a product manager reviewing a spec.
 Read: specs/[feature]/spec.md
 Find: user stories without full AC coverage, missing edge cases, implicit assumptions.
-Return only gaps. Do not rewrite the spec.
+
+Return issues in this format:
+[ISSUE] [AC-N or Section] Product [Type: Missing/Ambiguous/UX-Gap] [Description]
+
+Do not rewrite the spec — issues only.
 ```
 
 ### Phase 2 Critic Agents
@@ -78,7 +92,11 @@ You are a senior engineer who prefers simple solutions.
 Read: specs/[feature]/plan.md
 Find: abstractions that could be replaced with direct framework usage,
 unnecessary indirection, premature generalization.
-Return only architectural concerns. Be specific.
+
+Return issues in this format:
+[ISSUE] [Section] Architecture [Type: Over-engineering/Missing/Risk] [Description]
+
+Be specific — issues only.
 ```
 
 ```
@@ -86,7 +104,11 @@ Return only architectural concerns. Be specific.
 You are a frontend developer who will consume these APIs.
 Read: specs/[feature]/contracts/
 Find: missing error codes, ambiguous response shapes, missing edge cases.
-Return only incomplete or ambiguous contract items.
+
+Return issues in this format:
+[ISSUE] [endpoint or Section] Contract [Type: Missing/Ambiguous/Schema] [Description]
+
+Do not approve — incomplete or ambiguous items only.
 ```
 
 ```
@@ -95,7 +117,11 @@ You are a DBA reviewing a schema for correctness.
 Read: specs/[feature]/data-model.md
 Find: missing indexes, implicit constraints that should be explicit,
 N+1 query risks, denormalization that will cause consistency issues.
-Return only specific schema problems.
+
+Return issues in this format:
+[ISSUE] [EntityName or Section] DB [Type: Schema/Missing/Risk] [Description]
+
+Specific schema problems only.
 ```
 
 ---

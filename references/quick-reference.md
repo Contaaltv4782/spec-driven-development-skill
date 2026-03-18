@@ -115,7 +115,7 @@ Then [observable outcome]
 ## Gate Checklist (Summary)
 
 **Gate 0 (constitution.md):** Stack locked? 5+ security rules? No vague banned patterns? Structure documented?
-**Gate 1 (spec.md):** Testable ACs? No tech details? No open questions? Scope defined?
+**Gate 1 (spec.md):** Testable ACs? No tech details? No open questions? Scope defined? No blocking constitution `[PENDING]`?
 **Gate 2 (plan.md + contracts):** AC traceability? All errors defined? Schema complete?
 **Gate 3 (tasks.md):** Tests before implementation? Task size OK? No dependency cycles?
 **Gate 4 (per task):** Tests pass? Signatures match? Scope adhered to?
