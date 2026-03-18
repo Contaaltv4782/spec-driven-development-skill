@@ -1,0 +1,95 @@
+# Spec-Driven Development Skill
+
+An **Agent Skill** for structured, specification-first development with AI coding agents.
+Compatible with Claude Code, Cursor, GitHub Copilot, JetBrains Junie, Windsurf, and similar tools.
+
+## What is Spec-Driven Development?
+
+SDD makes specifications the source of truth. Instead of prompting an AI with vague
+descriptions and hoping for the right output, you:
+
+1. **Specify** what to build (requirements, acceptance criteria)
+2. **Plan** how to build it (architecture, data model, API contracts)
+3. **Break down** work into atomic, dependency-mapped tasks
+4. **Implement** with AI constrained by the spec
+5. **Validate** that the implementation satisfies the spec
+
+The result: predictable output, traceable decisions, and resilience to pivot requests.
+
+## Installation
+
+```bash
+npx skills add mariano-aguero/spec-driven-development-skill
+```
+
+The skill activates automatically when you reference spec-driven development, spec authoring,
+SDD, requirements planning, or AI implementation guidance.
+
+## Workflow at a Glance
+
+```
+/sdd:specify "add user authentication"
+  → creates specs/user-auth/spec.md
+
+/sdd:plan
+  → creates specs/user-auth/plan.md
+  → creates specs/user-auth/data-model.md
+  → creates specs/user-auth/contracts/auth-api.md
+
+/sdd:tasks
+  → creates specs/user-auth/tasks.md (ordered, with dependencies)
+
+[implement each task with fresh AI context, commit after each]
+
+/sdd:validate
+  → produces traceability matrix and drift report
+```
+
+## What's Included
+
+| File | Contents |
+|------|---------|
+| `SKILL.md` | Entry point: workflow, phase descriptions, reference index |
+| `references/artifact-templates.md` | Copy-paste templates for all 5 artifact types |
+| `references/prompt-patterns.md` | Prompts for every phase and scenario |
+| `references/workflow-phases.md` | Step-by-step instructions for each phase |
+| `references/quality-gates.md` | Per-phase checklists and CI/CD integration |
+| `references/ai-agent-patterns.md` | Multi-agent orchestration, context management |
+| `references/anti-patterns.md` | 9 common failure modes with fixes |
+| `references/quick-reference.md` | One-page cheat sheet |
+
+## When to Use SDD
+
+**Use it when:**
+- AI generates code that ignores your constraints
+- Requirements are complex with multiple stakeholders
+- The same prompt produces different implementations across sessions
+- Your feature touches auth, database schema, or public APIs
+- Your team needs shared technical understanding before writing code
+
+**Skip it for:**
+- Bug fixes under 30 minutes
+- Refactors with no behavior change
+- Throwaway prototypes
+
+## Key Principles
+
+**Specifications are not suggestions.** API contracts define the exact shape. Code that
+deviates from the contract is drift — fix the code, not the spec.
+
+**Fresh context per task.** Each task gets its own AI session. Accumulated context from
+prior sessions introduces wrong assumptions.
+
+**Commit after each task.** Not at the end of Phase 4. After each individual task.
+Clean history enables precise rollback when drift is discovered.
+
+**Human gates are non-negotiable.** spec.md, plan.md, and tasks.md each require human
+approval before the next phase begins. AI cannot approve its own output.
+
+## Version History
+
+- v1.0.0 — Initial release: 5-phase workflow, 8 reference files, templates and prompts
+
+## License
+
+MIT — Mariano Aguero
