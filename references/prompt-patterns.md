@@ -499,3 +499,87 @@ Do not approve, summarize, or compliment — issues only.
 ```
 
 Use separate critic agents for each role. Aggregate their feedback before proceeding.
+
+---
+
+## Constitution from Existing Codebase
+
+*Use when onboarding SDD onto a project that already exists. Derives constitution.md
+from actual code patterns rather than aspirational decisions. Run once before
+writing the first feature spec.*
+
+```
+Derive a constitution.md for this codebase from what actually exists, not what
+we wish existed.
+
+Read the following to understand the real patterns in use:
+- Package manifest: [package.json / go.mod / Cargo.toml / requirements.txt]
+- Representative route or handler files: [list 2-3 file paths]
+- Database schema or migration files: [file paths]
+- Lint and formatter config: [.eslintrc / .prettierrc / pyproject.toml / etc.]
+- Auth middleware or security utilities: [file paths]
+
+Extract and document:
+
+1. Technology Stack — every language, framework, and library in active use (with versions)
+2. Architecture Principles — patterns that repeat across files (layered architecture,
+   repository pattern, how routing is organized, how errors propagate)
+3. Naming Conventions — derive from actual file names, variable names, and DB column names
+4. Security Constraints — auth patterns present, input validation approach,
+   what is consistently enforced vs. absent
+5. File Structure — actual directory layout, where different concerns live
+6. Patterns to Preserve — conventions applied consistently that new code should follow
+7. Patterns to Avoid — things done inconsistently, or marked with TODO/FIXME/HACK comments
+
+For each section where the codebase is inconsistent, write:
+[INCONSISTENT] [what varies] → [options observed] — human must decide which to standardize
+
+For anything undecided or unclear, write [PENDING].
+
+Do NOT invent rules not evidenced in the code. Describe what is, not what should be.
+Output as constitution.md following the template in references/artifact-templates.md.
+```
+
+After generating, resolve every `[INCONSISTENT]` and `[PENDING]` item before using
+the constitution in any feature spec. An inconsistent constitution produces inconsistent specs.
+
+---
+
+## Cross-Feature Conflict Detector
+
+*Run after a new spec.md is ready (post-Clarify, pre-Phase 2). Checks the new spec
+against all existing active and archived specs for behavioral, structural, and ownership
+conflicts. Most valuable on projects with 3+ completed features.*
+
+```
+You are reviewing specs/[new-feature]/spec.md for conflicts with existing features.
+
+Read:
+- specs/[new-feature]/spec.md (new spec being validated)
+- All spec.md files in specs/ (other active features, if any)
+- All spec.md files in specs/archive/ (completed features)
+
+Check for the following conflict types:
+
+1. Endpoint conflicts — does the new spec imply an API endpoint that already exists
+   in another spec with different behavior, response shape, or error codes?
+
+2. Entity conflicts — does the new spec reference a shared entity (User, Order, etc.)
+   that another spec also modifies? Are the write operations compatible?
+
+3. Behavioral conflicts — does an AC in the new spec contradict behavior defined in
+   an existing spec? Example: new spec says "unauthenticated users can view X",
+   existing spec says "all /api/v1/* routes require authentication".
+
+4. Ownership conflicts — does the new spec modify data or endpoints owned by another
+   feature without explicitly calling it out as a cross-feature dependency?
+
+5. Naming conflicts — same entity or concept named differently across specs,
+   suggesting they may be the same thing or may diverge unnecessarily.
+
+Return issues in this format:
+[CONFLICT] [new-spec section] vs [existing-spec file + section] [Type: Endpoint/Entity/Behavior/Ownership/Naming] [Description]
+
+If no conflicts are found, respond: "No conflicts detected against existing specs."
+Do NOT suggest spec rewrites — report conflicts only. Human resolves each conflict.
+```

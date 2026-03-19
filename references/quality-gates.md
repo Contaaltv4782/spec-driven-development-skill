@@ -73,8 +73,9 @@ Run before Phase 4. All items must pass.
 |-------|--------------|
 | Test-first order | Every implementation task has a preceding test task |
 | Task size | No task touches more than 3 files or estimated at L without justification |
-| AC references | Test tasks cite specific ACs from spec.md |
+| AC references | Test tasks cite specific ACs from spec.md (including error ACs) |
 | Contract references | Implementation tasks cite specific contracts/ files |
+| Satisfies declaration | Implementation tasks declare which ACs they satisfy |
 | Dependency validity | Task dependencies form a valid DAG (no cycles) |
 | Parallelism accuracy | [P] tasks have no shared write dependencies |
 

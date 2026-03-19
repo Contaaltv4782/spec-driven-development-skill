@@ -307,3 +307,87 @@ scope, and performance. Correct the wrong ones before they become ACs.
 
 The cost of surfacing assumptions: ~2 minutes.
 The cost of discovering wrong assumptions in Phase 4: hours of rework plus spec amendment.
+
+---
+
+## Anti-Pattern 15: Running Critics in the Generating Context
+
+**Symptoms:**
+- Critic agent finds only minor issues in a spec it just wrote
+- "No issues found" after a 30-second review of a complex spec
+- The critique reads like a summary of the spec, not a challenge to it
+- Issues surface in Phase 4 that a genuine critic would have caught
+
+**The trap:** Running Phase 1 or Phase 2 critic agents in the same conversation that
+generated the spec or plan. The generating agent has anchored to its own decisions.
+When asked to critique, it rationalizes its choices as deliberate rather than questioning
+them. It finds surface-level issues while missing structural ones.
+
+**Example (wrong):**
+```
+[User generates spec.md in conversation A]
+[User runs QA Critic prompt in the same conversation A]
+→ "The spec looks comprehensive. Minor suggestion: AC-3 could be more specific."
+→ Ships to Phase 2. Phase 4 reveals AC-3 has no error path coverage.
+```
+
+**Example (correct):**
+```
+[User generates spec.md in conversation A → closes conversation]
+[User opens new conversation B, pastes QA Critic prompt + spec.md content]
+→ "ISSUE AC-3 QA Untestable: no error case for invalid token — what happens when it expires?"
+→ Fixed before Plan generation.
+```
+
+**Fix:** Run every critic agent in a fresh context with no memory of the generating session.
+The critic receives only: the artifact being reviewed + the critic prompt.
+No context about why decisions were made — that's what makes it find real issues.
+
+A critic that knows the reasoning behind each decision cannot genuinely challenge those
+decisions. This is precisely why the Subagent Review Pattern uses separate agents.
+"I'll review my own spec" is not a review — it's a summary with extra steps.
+
+---
+
+## Anti-Pattern 16: Tasks Without Acceptance Criteria References
+
+**Symptoms:**
+- tasks.md has entries like "Implement UserRepository" with no AC citation
+- During Phase 4, AI asks "what should happen when the user isn't found?"
+- Gate 4 cannot be verified — unknown which ACs each task was supposed to cover
+- Test tasks pass but the wrong behavior is tested
+- Two tasks implement overlapping behavior; one AC is never covered
+
+**The trap:** Task breakdown felt faster without AC references. The tasks look clear.
+But in Phase 4, each task runs in a fresh context — the AI has no spec unless you
+provide it explicitly. Without AC citations, you don't know which spec sections to
+include in the task context, and the AI has no definition of "done."
+
+**Example (wrong):**
+```markdown
+- [ ] **TASK-003** [M] Write tests for UserRepository.create()
+  - Depends on: TASK-001
+
+- [ ] **TASK-004** [M] Implement UserRepository.create()
+  - Depends on: TASK-003
+```
+
+**Example (correct):**
+```markdown
+- [ ] **TASK-003** [M] Write tests for UserRepository.create()
+  - Tests: AC-1 (success path), AC-E1 (duplicate email), AC-E2 (invalid input)
+  - Depends on: TASK-001
+
+- [ ] **TASK-004** [M] Implement UserRepository.create()
+  - Contract: `specs/[feature]/contracts/user-api.md → POST /users`
+  - Satisfies: AC-1, AC-E1, AC-E2
+  - Depends on: TASK-003
+```
+
+**Fix:** Every task must declare:
+- **Test tasks:** the specific ACs being tested, including error ACs
+- **Implementation tasks:** the contract it implements + the ACs it satisfies
+
+This makes Gate 4 mechanical: run the tests, check the AC list, verify the contract.
+It also makes Phase 4 context loading automatic — you know exactly which spec sections
+to include in each task's context window without guessing.

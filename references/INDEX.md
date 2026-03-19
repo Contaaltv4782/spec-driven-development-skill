@@ -32,6 +32,8 @@ Navigation map for all SDD reference files.
 - Phase 5 — Validate prompts → `prompt-patterns.md#phase-5--validate-prompts`
 - Multi-agent review (standardized output) → `prompt-patterns.md#multi-agent-review-pattern`
 - Amend (requirements change cascade) → `prompt-patterns.md#amend-prompt-sddamend--run-when-requirements-change`
+- Constitution from existing codebase → `prompt-patterns.md#constitution-from-existing-codebase`
+- Cross-feature conflict detector → `prompt-patterns.md#cross-feature-conflict-detector`
 
 ### Phase details (step-by-step)
 - Phase 0 — Constitution → `workflow-phases.md#phase-0--constitution`
@@ -65,6 +67,8 @@ Navigation map for all SDD reference files.
 - Oversized tasks → `anti-patterns.md#anti-pattern-5-oversized-tasks`
 - Over-specified specs (HOW in spec, not WHAT) → `anti-patterns.md#anti-pattern-13-over-specified-specs`
 - Implicit assumptions baked into ACs → `anti-patterns.md#anti-pattern-14-implicit-assumptions-never-challenged`
+- Critics run in the generating context → `anti-patterns.md#anti-pattern-15-running-critics-in-the-generating-context`
+- Tasks without AC references → `anti-patterns.md#anti-pattern-16-tasks-without-acceptance-criteria-references`
 
 ---
 
