@@ -37,6 +37,7 @@ Run before Phase 2. All items must pass.
 | MoSCoW prioritization | Every AC has a `[MUST]` / `[SHOULD]` / `[COULD]` / `[WONT]` label |
 | No vague terms | No "fast", "secure", "works correctly" without measurable thresholds |
 | Non-functional requirements | Performance and security requirements stated with specific values |
+| Boundaries (optional) | If feature has complex AI behavior constraints, Boundaries section is populated |
 | Stakeholder alignment | Relevant stakeholders have reviewed and agreed |
 
 **Fail action:** Return to Phase 1 + Clarify step. Do not proceed to Phase 2.
@@ -56,6 +57,7 @@ Run before Phase 3. All items must pass.
 | Data model completeness | All entities mentioned in spec.md appear in data-model.md |
 | Migrations defined | If the feature modifies the database schema, at least one migration block is defined in data-model.md |
 | Index justification | Indexes in data-model.md are justified by specific query patterns |
+| Risks identified | Risks table present; every High-impact risk has a mitigation |
 | No over-engineering | No abstractions that could be replaced with direct framework usage |
 | Technology fit | Technology choices use existing stack unless new dependency is justified |
 
@@ -92,6 +94,7 @@ Run per-task, before marking task complete and committing.
 | Scope adherence | No files modified outside the task's stated scope |
 | No silent failures | Error cases are handled, not swallowed |
 | Constitution check | No banned patterns introduced; security constraints respected |
+| Boundaries check | If spec.md has a Boundaries section, Always do / Never do rules were followed |
 
 **Fail action:** Fix before committing. Do not mark task complete.
 

@@ -50,10 +50,56 @@ For each constraint, write it as an explicit rule an AI agent can check:
 
 ## Phase 1 — Specify Prompts
 
+### Assumptions Surface Prompt
+
+*Run this BEFORE the Initial Specification Prompt. Forces AI transparency about
+implicit decisions before they get baked into acceptance criteria.*
+
+```
+I want to build: [feature description]
+
+Before generating any spec, surface your assumptions. List every assumption
+you are making about:
+
+1. User roles and permissions — who can trigger this feature?
+2. Data ownership — whose data is this, and who can read or modify it?
+3. Error behavior — what happens when inputs are invalid or dependencies fail?
+4. Integration — what other parts of the system does this feature touch?
+5. Scope boundaries — what does "done" mean for this feature?
+6. Performance — any implicit thresholds (latency, rate limits, data volume)?
+
+Do NOT write any spec yet. Return only the assumption list.
+Human will review and correct assumptions before the spec is written.
+```
+
+After reviewing the AI's assumption list, pass your corrections into the Initial
+Specification Prompt below by adding a `Corrected assumptions:` block before the
+`Requirements:` section. Match the 6 areas from the surface prompt:
+```
+Corrected assumptions:
+- Roles: [your correction or "confirmed"]
+- Data ownership: [your correction or "confirmed"]
+- Error behavior: [your correction or "confirmed"]
+- Integration: [your correction or "confirmed"]
+- Scope: [your correction or "confirmed"]
+- Performance: [your correction or "confirmed"]
+```
+
+---
+
 ### Initial Specification Prompt
 
 ```
 I want to build: [feature description in plain language]
+
+[If you ran the Assumptions Surface Prompt, insert your corrected assumptions here:]
+Corrected assumptions:
+- Roles: [confirmed / correction]
+- Data ownership: [confirmed / correction]
+- Error behavior: [confirmed / correction]
+- Integration: [confirmed / correction]
+- Scope: [confirmed / correction]
+- Performance: [confirmed / correction]
 
 Generate a spec.md for this feature following the SDD workflow. Use the template in
 references/artifact-templates.md.
@@ -164,7 +210,7 @@ Return only gaps and missing items, not a full rewrite.
 
 ```
 Read specs/[feature]/spec.md and generate:
-1. plan.md — technical architecture and component breakdown
+1. plan.md — technical architecture, component breakdown, risks
 2. data-model.md — entities, fields, relationships, indexes
 3. contracts/[name].md — API endpoints (one file per domain)
 
@@ -174,6 +220,10 @@ Constraints:
 - Use framework features directly — avoid unnecessary wrapper layers
 - Every AC in spec.md must map to at least one component in plan.md
 - Follow existing patterns in: [reference file or convention]
+
+For plan.md, include a Risks section: identify implementation risks (third-party
+dependencies, data migrations, external APIs, concurrency issues) and a mitigation
+for every High-impact risk. Use the template in references/artifact-templates.md.
 
 Generate files sequentially: plan.md first, then data-model.md, then contracts/.
 ```
@@ -188,6 +238,7 @@ Check:
 2. Completeness: are all data-model.md entities referenced in plan.md?
 3. Contract completeness: does every component that exposes an API have a contract?
 4. Over-engineering: are there abstractions that could be replaced with direct framework usage?
+5. Risks completeness: does the Risks section exist? Is every High-impact risk mitigated?
 
 Return a gap analysis only — do not regenerate the files.
 ```
@@ -242,6 +293,7 @@ Implement TASK-[N]: [task title]
 Read and follow:
 - constitution.md (project-level rules — never violate)
 - Acceptance criteria: specs/[feature]/spec.md → [section heading]
+- Feature boundaries: specs/[feature]/spec.md → Boundaries (if present)
 - Technical design: specs/[feature]/plan.md → [section heading]
 - API contract: specs/[feature]/contracts/[file].md
 - Data model: specs/[feature]/data-model.md → [EntityName]
@@ -251,6 +303,7 @@ Do NOT:
 - Deviate from the API signatures in contracts/
 - Introduce abstractions not in plan.md
 - Violate any rule in constitution.md
+- Violate any rule in the spec's Boundaries section
 
 After implementation, verify:
 - [ ] All referenced ACs have test coverage
@@ -267,6 +320,9 @@ Project constitution (non-negotiable rules):
 
 Acceptance criteria (from spec.md):
 [paste only the ACs this task must satisfy]
+
+Feature boundaries (from spec.md → Boundaries, if present):
+[paste Always do / Ask first / Never do rules, or omit if section absent]
 
 Technical design (from plan.md):
 [paste only the relevant component section]

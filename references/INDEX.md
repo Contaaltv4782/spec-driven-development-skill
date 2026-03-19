@@ -8,19 +8,22 @@ Navigation map for all SDD reference files.
 
 ### Getting started
 - Overview and when to use → `SKILL.md`
-- Quick Start (3-step onboarding) → `SKILL.md#quick-start`
+- Quick Start (4-step onboarding) → `SKILL.md#quick-start`
+- Key Practice: Reframe Vague Requirements → `SKILL.md#key-practice-reframe-vague-requirements`
+- Living Document (spec versioning, commit, archive) → `SKILL.md#living-document`
 - One-page cheat sheet → `quick-reference.md`
 
 ### Templates (copy-paste ready)
 - constitution.md template → `artifact-templates.md#constitutionmd-template`
-- spec.md template → `artifact-templates.md#specmd-template`
-- plan.md template → `artifact-templates.md#planmd-template`
+- spec.md template (incl. Boundaries section) → `artifact-templates.md#specmd-template`
+- plan.md template (incl. Risks section) → `artifact-templates.md#planmd-template`
 - data-model.md template → `artifact-templates.md#data-modelmd-template`
 - contracts/[endpoint].md template → `artifact-templates.md#contractsendpointmd-template`
 - tasks.md template → `artifact-templates.md#tasksmd-template`
 
 ### Prompts (copy-paste ready)
 - Phase 0 — Constitution prompts → `prompt-patterns.md#phase-0--constitution-prompts`
+- Phase 1 — Surface assumptions (pre-spec) → `prompt-patterns.md#assumptions-surface-prompt`
 - Phase 1 — Specify prompts → `prompt-patterns.md#phase-1--specify-prompts`
 - Phase 1 — Post-Clarify spec update → `prompt-patterns.md#post-clarify-spec-update-prompt`
 - Phase 2 — Plan prompts → `prompt-patterns.md#phase-2--plan-prompts`

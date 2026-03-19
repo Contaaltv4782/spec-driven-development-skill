@@ -36,15 +36,19 @@ Start with spec-first. Move to spec-anchored when the feature stabilizes.
 
 ## Quick Start
 
-New to SDD? Three steps to your first spec-driven feature:
+New to SDD? Four steps to your first spec-driven feature:
 
 1. **Create your constitution** (once per project):
    `/sdd:init` — run this first, before any feature specs
 
-2. **Specify your first feature:**
+2. **Surface AI assumptions** (before specifying):
+   Ask the AI to list its implicit assumptions about roles, permissions, error behavior,
+   and scope — then correct them before any AC is written
+
+3. **Specify your first feature:**
    `/sdd:specify [brief description]` — generates `spec.md` with MoSCoW-prioritized ACs
 
-3. **Follow the gates:**
+4. **Follow the gates:**
    Clarify → Plan → Tasks → Implement → Validate
    Human approval required at each gate before the next phase
 
@@ -67,6 +71,22 @@ Symptoms that signal SDD is needed:
 - Disposable prototypes where requirements will immediately change
 - Solo exploration spikes lasting less than a day
 
+## Key Practice: Reframe Vague Requirements
+
+Before writing any AC, convert vague requirements into measurable targets:
+
+| Vague | Concrete |
+|-------|---------|
+| "make it faster" | "LCP < 2.5s on a 4G connection" |
+| "it should be secure" | "requires authenticated session; all inputs validated before processing" |
+| "handle errors properly" | "returns 4xx with structured error code, never exposes stack traces" |
+| "should scale" | "handles 1000 concurrent users at < 500ms p95" |
+| "works correctly" | "Given X, When Y, Then Z — independently verifiable" |
+
+If you cannot write a passing test for an AC, the AC is not concrete enough.
+
+---
+
 ## Directory Structure
 
 ```
@@ -81,6 +101,7 @@ specs/
     tasks.md             # Atomic executable task list
     research.md          # Optional: context and alternatives considered
     decision_log.md      # Optional: rationale for key decisions
+  archive/               # Completed feature specs (move here after feature ships)
 ```
 
 ## Phase 0 — Constitution *(one-time per project)*
@@ -108,6 +129,11 @@ See `references/artifact-templates.md` for the `constitution.md` template.
 ### Phase 1 — Specify
 
 **Invoke:** `/sdd:specify [feature description]`
+
+**Surface assumptions first** — before generating spec.md, run the Assumptions Surface
+Prompt (see `references/prompt-patterns.md`). This forces the AI to make its implicit
+assumptions about roles, permissions, error behavior, and scope explicit for human review
+*before* they get baked into acceptance criteria.
 
 Creates `specs/[feature]/spec.md` containing:
 - Feature overview (1–2 sentences, non-technical)
@@ -138,7 +164,7 @@ See `references/artifact-templates.md` for the `spec.md` template.
 **Invoke:** `/sdd:plan` (reads `spec.md` + `constitution.md`)
 
 Creates in `specs/[feature]/`:
-- `plan.md` — Technical architecture, component breakdown, technology choices, tradeoffs
+- `plan.md` — Technical architecture, component breakdown, technology choices, tradeoffs, risks
 - `data-model.md` — Entities, fields, relationships, constraints, indexes
 - `contracts/` — API endpoint definitions, request/response schemas, error codes, events
 - `research.md` — Optional: alternatives considered, rationale for technology choices
@@ -149,6 +175,7 @@ Creates in `specs/[feature]/`:
 - [ ] Data model covers all entities mentioned in spec
 - [ ] API contracts are complete (inputs, outputs, all error codes)
 - [ ] Migrations defined for any database schema changes (in `data-model.md`)
+- [ ] Risks identified with mitigations for each High-impact item
 - [ ] No unnecessary abstractions (use framework features directly)
 - [ ] Technology choices use existing stack unless justified
 
@@ -190,6 +217,7 @@ Implement: [task title from tasks.md]
 Constrained by:
 - constitution.md (project-level rules — never violate)
 - Acceptance criteria: specs/[feature]/spec.md → [section]
+- Feature boundaries: specs/[feature]/spec.md → Boundaries (if present)
 - Technical design: specs/[feature]/plan.md → [section]
 - API contract: specs/[feature]/contracts/[file].md
 - Data model: specs/[feature]/data-model.md
@@ -198,7 +226,7 @@ Do NOT:
 - Add functionality outside the scope of spec.md
 - Deviate from the API signatures in contracts/
 - Introduce abstractions not in plan.md
-- Violate any rule in constitution.md
+- Violate any rule in constitution.md or the Boundaries section
 ```
 
 **Session hygiene:**
@@ -227,6 +255,7 @@ Checks for spec drift:
 - Acceptance criteria with no corresponding test
 - Functionality that appears in code but not in `spec.md`
 - Constitution constraint violated
+- Boundaries rule violated (Always do / Never do from spec.md)
 
 See `references/quality-gates.md` for CI/CD integration patterns.
 
@@ -239,13 +268,29 @@ AI makes thousands of micro-decisions silently — each one a potential divergen
 
 Prevention:
 1. **Constitution first** — project-level constraints prevent drift at the root
-2. **Clarify before planning** — unresolved ambiguities in spec.md become wrong architecture
-3. **Specificity beats verbosity** — "returns 404 when resource not found" beats 3 paragraphs
-4. **Lock contracts before implementation** — never modify `contracts/` during Phase 4
-5. **One context per task** — a fresh AI session per task eliminates accumulated assumptions
-6. **Commit gates** — only proceed to next task after current task passes tests
+2. **Surface assumptions before specifying** — wrong assumptions become wrong ACs become wrong code
+3. **Clarify before planning** — unresolved ambiguities in spec.md become wrong architecture
+4. **Specificity beats verbosity** — "returns 404 when resource not found" beats 3 paragraphs
+5. **Lock contracts before implementation** — never modify `contracts/` during Phase 4
+6. **One context per task** — a fresh AI session per task eliminates accumulated assumptions
+7. **Commit gates** — only proceed to next task after current task passes tests
 
 See `references/anti-patterns.md` for detailed failure modes.
+
+---
+
+## Living Document
+
+Specs are not write-once artifacts. Keep them current:
+
+- **When decisions change:** run `/sdd:amend` — never patch files manually
+- **Commit specs with code:** include spec files in the same PR as the implementation they drive
+- **Reference in PRs:** link to `specs/[feature]/spec.md` in your pull request description
+- **Version your specs:** each spec.md carries a `Status` and `Version` header for auditability
+- **Archive when done:** move completed specs to `specs/archive/` after the feature ships
+
+Treating the spec as disposable after implementation defeats its purpose — it becomes
+the source of truth for future changes, onboarding, and drift detection.
 
 ---
 

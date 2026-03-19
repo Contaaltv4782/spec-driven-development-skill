@@ -56,6 +56,7 @@ specs/[feature]/
 | Rule | Why |
 |------|-----|
 | Constitution before any spec | Without it, every feature reinvents the wheel |
+| Surface assumptions before specifying | Implicit AI assumptions become wrong ACs |
 | No implementation details in spec.md | Spec describes behavior, not mechanism |
 | Clarify before Plan | Ambiguous spec = wrong architecture |
 | Lock contracts/ before Phase 4 | Changing contracts mid-implementation = drift |
@@ -63,6 +64,7 @@ specs/[feature]/
 | Commit after each task | Clean rollback if task produced drift |
 | Code must match spec (never reverse) | Updating spec to match code destroys its value |
 | Human approves each phase gate | AI cannot approve its own output |
+| Commit specs with code | Spec files belong in the same PR as implementation |
 
 ---
 
@@ -117,7 +119,7 @@ Then [observable outcome]
 
 **Gate 0 (constitution.md):** Stack locked? 5+ security rules? No vague banned patterns? Structure documented?
 **Gate 1 (spec.md):** Testable ACs? No tech details? No open questions? Scope defined? No blocking constitution `[PENDING]`?
-**Gate 2 (plan.md + contracts):** AC traceability? All errors defined? Schema complete?
+**Gate 2 (plan.md + contracts):** AC traceability? All errors defined? Schema complete? Risks with mitigations?
 **Gate 3 (tasks.md):** Tests before implementation? Task size OK? No dependency cycles?
 **Gate 4 (per task):** Tests pass? Signatures match? Scope adhered to?
 **Gate 5 (final):** Traceability matrix complete? Zero drift? User story walkthrough done?

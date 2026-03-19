@@ -78,7 +78,7 @@ Ask the user (or gather from issue/PRD):
 - What does success look like?
 - What are hard constraints (performance, security, compatibility)?
 
-**Step 1.1a — Constitution [PENDING] check**
+**Step 1.2 — Constitution [PENDING] check**
 Before generating spec.md, scan `constitution.md` for any `[PENDING]` items that
 intersect with this feature's domain. A [PENDING] item is blocking when the spec
 would need to make the same undecided choice.
@@ -92,11 +92,23 @@ Common blocking cases:
 For each blocking item: resolve it in constitution.md first, then proceed.
 For non-intersecting [PENDING] items: proceed — they don't affect this spec.
 
-**Step 1.2 — Generate spec.md**
+**Step 1.3 — Surface AI assumptions**
+Run the Assumptions Surface Prompt from
+`references/prompt-patterns.md → Phase 1 → Assumptions Surface Prompt`.
+
+Use the full context from Step 1.1. The AI will list every implicit assumption it's
+making about: user roles, permissions, error behavior, system integrations, and scope
+boundaries. Review and correct these *before* the spec is generated.
+
+Doing this after intake (not before) produces targeted corrections — the AI's assumptions
+about a "B2B SaaS with SSO" are more specific than assumptions about "user auth".
+
+**Step 1.4 — Generate spec.md**
 Use the prompt in `references/prompt-patterns.md → Phase 1 → Initial Specification Prompt`.
+Include corrected assumptions from Step 1.3 in the prompt.
 Place output at `specs/[feature-branch-name]/spec.md`.
 
-**Step 1.3 — Clarify**
+**Step 1.5 — Clarify**
 Run the Clarify Phase Prompt from `references/prompt-patterns.md → Phase 1 → Clarify Phase Prompt`.
 Present the output to the human for review. After the human approves answers, run the
 Post-Clarify Spec Update Prompt (`references/prompt-patterns.md → Post-Clarify Spec Update Prompt`)
@@ -104,7 +116,7 @@ to apply the approved resolutions to spec.md.
 
 All `[NEEDS CLARIFICATION]` items must be `[RESOLVED]` before proceeding. Do not assume. Do not defer.
 
-**Step 1.4 — Human review (Gate 1)**
+**Step 1.6 — Human review (Gate 1)**
 The human must read and approve the updated `spec.md`. Use the Gate 1 checklist in
 `references/quality-gates.md`. This gate is non-negotiable.
 Common review feedback:
@@ -112,7 +124,7 @@ Common review feedback:
 - "This is actually out of scope" → move to out-of-scope section
 - "Missing error case" → add AC for the error case
 
-**Step 1.5 — Branch and commit**
+**Step 1.7 — Branch and commit**
 ```bash
 git checkout -b feature/[feature-name]
 git add specs/[feature-name]/spec.md
@@ -135,7 +147,9 @@ inventing solutions. Every design decision must be explicit.
 
 **Step 2.1 — Generate plan.md**
 Use the Technical Plan Generation Prompt from `references/prompt-patterns.md`.
-Include your stack constraints and existing conventions.
+Include your stack constraints and existing conventions. The plan must include a
+Risks section — identify implementation risks and a mitigation for every High-impact
+risk before Phase 3 begins (see template in `references/artifact-templates.md`).
 
 **Step 2.2 — Generate data-model.md**
 If the feature touches the database:
@@ -163,6 +177,7 @@ The human reviews `plan.md`, `data-model.md`, and `contracts/`. Particular focus
 - Are contracts complete enough to implement without questions?
 - Does the data model handle all the spec's data requirements?
 - Are there simpler approaches to any components?
+- Does the Risks section cover all High-impact risks with concrete mitigations?
 
 **Step 2.6 — Lock contracts**
 Once approved, `contracts/` are **frozen** for the duration of Phase 4.
@@ -230,6 +245,7 @@ Start a fresh context window for each task. Include:
 - `constitution.md` (always — project-level constraints, never violate)
 - The task description from `tasks.md`
 - Relevant ACs from `spec.md`
+- `Boundaries` section from `spec.md` (if present — feature-level constraints)
 - Relevant section from `plan.md`
 - Relevant contract from `contracts/`
 - Relevant entities from `data-model.md`
@@ -301,11 +317,11 @@ Check each AC as a user, not as a developer.
 **Step 5.5 — Archive specs (optional)**
 After validation passes, consider archiving completed specs to keep `specs/` clean:
 ```bash
-mkdir -p .specs/[feature-name]
-cp -r specs/[feature-name]/* .specs/[feature-name]/
+mkdir -p specs/archive/[feature-name]
+cp -r specs/[feature-name]/* specs/archive/[feature-name]/
 # Verify copy succeeded before removing originals
 rm -rf specs/[feature-name]
 ```
-Keep `.specs/` in version control — specs are invaluable for regression analysis when bugs
-appear in features implemented months earlier. Skip this step if your team prefers to
-keep all specs in `specs/` indefinitely.
+Keep `specs/archive/` in version control — specs are invaluable for regression analysis
+when bugs appear in features implemented months earlier. Skip this step if your team
+prefers to keep all specs in `specs/` indefinitely.
