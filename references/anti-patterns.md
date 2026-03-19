@@ -269,3 +269,38 @@ can be evaluated with full technical context.
 
 If you find yourself writing "use X to achieve Y" in a spec, stop.
 Move "use X" to plan.md and keep only "achieve Y" in spec.md.
+
+---
+
+## Anti-Pattern 14: Implicit Assumptions Never Challenged
+
+**Symptoms:**
+- AI generates a spec where "authenticated user" means session cookies — but your system uses API keys
+- "Success response" in every AC means 200, but you needed 201 for resource creation
+- The spec looks reasonable and the human approves it — mismatches surface in Phase 4
+- AI builds email-based password reset when the system requires SMS OTP
+
+**The trap:** The spec was written with the AI's assumptions baked in as facts. The human
+reviewer saw a plausible-looking spec and approved it. Nobody challenged the assumptions
+because they were never made visible.
+
+**Example (hidden assumptions):**
+```
+Prompt: "specify a password reset feature"
+
+AI assumes (silently):
+- Email-based reset link (but your system uses SMS)
+- 24-hour token expiry (but compliance requires 15 minutes)
+- Self-service (but your enterprise product requires admin approval)
+- Single active token per user (but you need session-scoped tokens)
+
+All four become wrong ACs in the spec.
+```
+
+**Fix:** Run the Assumptions Surface Prompt (see `references/prompt-patterns.md → Phase 1`)
+**after** feature intake but **before** generating spec.md. The AI will explicitly list
+every assumption it's making about roles, permissions, error behavior, integrations,
+scope, and performance. Correct the wrong ones before they become ACs.
+
+The cost of surfacing assumptions: ~2 minutes.
+The cost of discovering wrong assumptions in Phase 4: hours of rework plus spec amendment.
