@@ -2,7 +2,7 @@
 
 [![skills.sh](https://img.shields.io/badge/skills.sh-spec--driven--development-blue?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMiAxNWwtNS01IDEuNDEtMS40MUwxMCAxNC4xN2w3LjU5LTcuNTlMMTkgOGwtOSA5eiIvPjwvc3ZnPg==)](https://skills.sh)
 [![npm](https://img.shields.io/badge/npx_skills_add-mariano--aguero%2Fspec--driven--development--skill-brightgreen)](https://github.com/mariano-aguero/spec-driven-development-skill)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.4.0-orange)](https://github.com/mariano-aguero/spec-driven-development-skill/releases)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-purple)](https://claude.ai/code)
 [![Cursor](https://img.shields.io/badge/Cursor-compatible-purple)](https://cursor.sh)
@@ -118,6 +118,12 @@ approval before the next phase begins. AI cannot approve its own output.
 - v1.1.0 — Constitution phase, MoSCoW priorities, Clarify step, spec levels taxonomy, research subagents, spec recovery point, `/sdd:analyze` command, 12 anti-patterns
 - v1.0.0 — Initial release: 5-phase workflow, 8 reference files, templates and prompts
 
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for guidelines on adding anti-patterns, prompts, templates, and workflow improvements.
+
+Please follow our [Code of Conduct](.github/CODE_OF_CONDUCT.md).
+
 ## License
 
-MIT
+[MIT](LICENSE)
